@@ -9,6 +9,7 @@
 
 ```bash
 uv sync
+uv run pre-commit install
 ```
 
 To sync development dependencies run following command:
