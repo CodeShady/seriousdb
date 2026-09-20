@@ -10,8 +10,9 @@ The [architecture guide](architecture.md#call-flow) shows when the API loads and
 Direct `Cache` mutations require an explicit `flush()`.
 
 If a file contains invalid UTF-8, invalid JSON, or a JSON value other than an object, loading moves
-it to `<filename>.corrupt-<unix timestamp>`, logs a warning, and creates a new empty database. File
-access errors such as permission failures can still prevent loading.
+it to `<filename>.corrupt-<unix timestamp>` (appending a numeric suffix like `-1`, `-2` if that path
+already exists), logs a warning, and creates a new empty database. File access errors such as
+permission failures can still prevent loading.
 
 ## Current constraints
 
