@@ -10,7 +10,7 @@
 - If you'd like to submit a larger change, please open an issue first so it can be discussed and
   assigned.
 - Keep your PR in Draft until it's ready for review.
-- The target branch for PRs is always `development` branch.
+- The target branch for PRs is always `main`.
 
 PRs that skip this process may be closed without review.
 
