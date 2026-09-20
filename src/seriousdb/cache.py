@@ -8,6 +8,7 @@ single :class:`Cache` can be shared between request handlers.
 import json
 import logging
 import os
+import tempfile
 import time
 from threading import Lock
 
@@ -190,8 +191,14 @@ class Cache:
             if self.db is None or self.filename is None:
                 logger.error("Cannot flush database: database is not loaded")
                 return
-            with open(self.filename, "wb+") as f:
-                f.write(json.dumps(self.db).encode())
+            dir_name: str = os.path.dirname(self.filename) or "."
+            with tempfile.NamedTemporaryFile(
+                "wb", dir=dir_name, delete=False
+            ) as tmp_file:
+                tmp_file.write(json.dumps(self.db).encode())
+                tmp_file.flush()
+                os.fsync(tmp_file.fileno())
+            os.replace(tmp_file.name, self.filename)
 
 
 def _write_default(filename: str) -> dict[str, str]:
