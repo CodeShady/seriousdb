@@ -49,8 +49,7 @@ The `.env` file is gitignored and should never be committed.
 
 | Variable | Default | Description |
 | --- | --- | --- |
-| `SERIOUSDB_DB_FILE` | `.sdb` | Path to the
-on-disk database file. |
+| `SERIOUSDB_DB_FILE` | `.sdb` | Path to the on-disk database file. |
 | `SERIOUSDB_LOG_LEVEL` | `INFO` | Logging level (DEBUG/INFO/WARNING/ERROR/CRITICAL). |
 
 Set configuration before importing `seriousdb`.
