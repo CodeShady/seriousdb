@@ -7,7 +7,8 @@
 - To keep review load manageable, PRs are only reviewed if they:
   - resolve an issue you've been assigned to, or
   - are trivial (typos, small doc fixes, etc.).
-- If you'd like to submit a larger change, please open an issue first so it can be discussed and assigned.
+- If you'd like to submit a larger change, please open an issue first so it can be discussed and
+  assigned.
 - Keep your PR in Draft until it's ready for review.
 - The target branch for PRs is always `development` branch.
 
@@ -17,18 +18,20 @@ PRs that skip this process may be closed without review.
 
 - Format the Python code — see [Formatting](development.md#formatting).
 - Follow the [docstring conventions](development.md#docstrings).
-- If you add or change a public function, update [the API reference](api.md) and add or adjust tests to cover the new behavior.
+- If you add or change a public function, update [the API reference](api.md) and add or adjust tests
+  to cover the new behavior.
 
-Commits are always run pre-commit to enforce `uv lock`, `type check` ,`pytest` , `linting`, `formatting` and `conventional commit`
+Commits are always run pre-commit to enforce `uv lock`, `type check` ,`pytest` , `linting`,
+`formatting` and `conventional commit`
 
----
+______________________________________________________________________
 
 ## Commit Message Guidelines
 
-This project follows the **Conventional Commits** version 1.0.0 specification for all commit messages.
-These rules are validated and enforced via `pre-commit`.
+This project follows the **Conventional Commits** version 1.0.0 specification for all commit
+messages. These rules are validated and enforced via `pre-commit`.
 
----
+______________________________________________________________________
 
 ### Format Reference
 
@@ -40,7 +43,7 @@ These rules are validated and enforced via `pre-commit`.
 [optional footer(s): issue references, BREAKING CHANGE]
 ```
 
----
+______________________________________________________________________
 
 ### Commit Types
 
@@ -51,30 +54,36 @@ These rules are validated and enforced via `pre-commit`.
 - **`refactor`**: Code restructuring that neither fixes a bug nor adds a feature.
 - **`perf`**: Code changes that improve performance / speed / memory usage (bumps **PATCH**).
 - **`test`**: Adding missing tests or correcting existing tests; no production code change.
-- **`build`**: Changes that affect the build system or external dependencies (`pyproject.toml`, package upgrades).
-- **`ci`**: Changes to CI/CD configuration files and scripts (GitHub Actions, GitLab CI, `pre-commit.ci`).
-- **`chore`**: Maintenance / housekeeping tasks that don't modify source code or tests (`.gitignore`, release scripts).
+- **`build`**: Changes that affect the build system or external dependencies (`pyproject.toml`,
+  package upgrades).
+- **`ci`**: Changes to CI/CD configuration files and scripts (GitHub Actions, GitLab CI,
+  `pre-commit.ci`).
+- **`chore`**: Maintenance / housekeeping tasks that don't modify source code or tests
+  (`.gitignore`, release scripts).
 - **`revert`**: Reverts a previous commit.
 
-> **Breaking Changes**: Append `!` after the type/scope (e.g., `feat!: drop python 3.8 support`) to indicate a **MAJOR** version bump. Document details in the footer starting with `BREAKING CHANGE:`.
+> **Breaking Changes**: Append `!` after the type/scope (e.g., `feat!: drop python 3.8 support`) to
+> indicate a **MAJOR** version bump. Document details in the footer starting with
+> `BREAKING CHANGE:`.
 
----
+______________________________________________________________________
 
 ### Body Structure & Rules
 
-* **Blank Line**: Must be preceded by a single blank line after the subject line.
-* **Line Length**: Wrap lines at **72 characters** (standard Git convention).
-* **Content**: Focus on the **"why"** and **"what"**, not the "how" (the diff already shows how):
-  * What is the motivation for this change?
-  * How does it differ from previous behavior?
-  * Are there any side effects or trade-offs?
-* **Formatting**: Free-form text. Multiple paragraphs and markdown bullet points are allowed.
+- **Blank Line**: Must be preceded by a single blank line after the subject line.
+- **Line Length**: Wrap lines at **72 characters** (standard Git convention).
+- **Content**: Focus on the **"why"** and **"what"**, not the "how" (the diff already shows how):
+  - What is the motivation for this change?
+  - How does it differ from previous behavior?
+  - Are there any side effects or trade-offs?
+- **Formatting**: Free-form text. Multiple paragraphs and markdown bullet points are allowed.
 
----
+______________________________________________________________________
 
 ### Examples
 
 **Example A: Simple Body**
+
 ```text
 fix(auth): prevent token refresh race condition
 
@@ -84,6 +93,7 @@ exchange service.
 ```
 
 **Example B: Multi-paragraph with Bullet Points**
+
 ```text
 refactor(database): migrate connection pool to async engine
 
@@ -96,6 +106,7 @@ under high concurrent load.
 ```
 
 **Example C: Breaking Change in Body/Footer**
+
 ```text
 feat(api)!: switch authentication scheme to bearer tokens
 

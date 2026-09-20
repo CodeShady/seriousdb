@@ -35,7 +35,7 @@ seriousdb.get("name")
 
 ## Nix
 
->The project provides a Nix development environment with the tools required for local development.
+> The project provides a Nix development environment with the tools required for local development.
 
 ### Enter Nix develop
 
@@ -133,10 +133,11 @@ ruff check --fix .
 
 Python docstrings follow the [NumPy style](https://numpydoc.readthedocs.io/en/latest/format.html).
 
-Docstrings are required for public functions, classes and modules only; for private ones (prefixed with `_`) they are optional.
-This is enforced by `ruff` (see [Linting](#linting)).
+Docstrings are required for public functions, classes and modules only; for private ones (prefixed
+with `_`) they are optional. This is enforced by `ruff` (see [Linting](#linting)).
 
-A docstring starts with a one-line summary, followed by the sections that apply, such as `Parameters`, `Returns` and `Raises`:
+A docstring starts with a one-line summary, followed by the sections that apply, such as
+`Parameters`, `Returns` and `Raises`:
 
 ```python
 def select(self, key: str) -> str:
@@ -161,4 +162,5 @@ def select(self, key: str) -> str:
     """
 ```
 
-See [`cache.py`](../src/seriousdb/cache.py) and [`api.py`](../src/seriousdb/api.py) for more examples.
+See [`cache.py`](../src/seriousdb/cache.py) and [`api.py`](../src/seriousdb/api.py) for more
+examples.
