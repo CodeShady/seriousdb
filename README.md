@@ -2,9 +2,11 @@
 
 # seriousdb - A seriously simple database
 
-`seriousdb` is a small, simple key-value database you import directly into your Python project. It requires zero configuration and is designed to be effortless.
+`seriousdb` is a small, simple key-value database you import directly into your Python project. It
+requires zero configuration and is designed to be effortless.
 
-For setup, usage, architecture, persistence, and contribution guidance, see the [documentation](docs/).
+For setup, usage, architecture, persistence, and contribution guidance, see the
+[documentation](docs/).
 
 ## Quick Start
 
@@ -31,14 +33,13 @@ seriousdb.set("name", "Alice")
 print(seriousdb.get("name"))
 ```
 
-The database is loaded on first use. See the [API reference](docs/api.md)
-for supported operations and [persistence](docs/persistence.md) for file
-handling and concurrency limits.
+The database is loaded on first use. See the [API reference](docs/api.md) for supported operations
+and [persistence](docs/persistence.md) for file handling and concurrency limits.
 
 ## Configuration
 
-Configuration is optional and can be customized from environment variables.
-Copy the example file and adjust for local development:
+Configuration is optional and can be customized from environment variables. Copy the example file
+and adjust for local development:
 
 ```bash
 cp .env.example .env
@@ -46,10 +47,10 @@ cp .env.example .env
 
 The `.env` file is gitignored and should never be committed.
 
-| Variable              | Default | Description                                        |
-| --------------------- | ------- | --------------------------------------------------- |
-| `SERIOUSDB_DB_FILE`   | `.sdb`  | Path to the on-disk database file.                 |
-| `SERIOUSDB_LOG_LEVEL` | `INFO`  | Logging level (DEBUG/INFO/WARNING/ERROR/CRITICAL). |
+| Variable | Default | Description | | --------------------- | ------- |
+--------------------------------------------------- | | `SERIOUSDB_DB_FILE` | `.sdb` | Path to the
+on-disk database file. | | `SERIOUSDB_LOG_LEVEL` | `INFO` | Logging level
+(DEBUG/INFO/WARNING/ERROR/CRITICAL). |
 
 Set configuration before importing `seriousdb`.
 
