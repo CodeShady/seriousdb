@@ -8,6 +8,7 @@ single :class:`Cache` can be shared between request handlers.
 import json
 import logging
 import os
+import tempfile
 import time
 from threading import Lock
 
@@ -132,9 +133,10 @@ class Cache:
 
         If the file does not exist, it is created with an empty database.
         If it is not valid UTF-8 JSON or does not contain a JSON object, it is
-        renamed to ``<filename>.corrupt-<unix timestamp>``, a warning is
-        logged, and a new file with an empty database is created in its
-        place.
+        renamed to ``<filename>.corrupt-<unix timestamp>``. If that backup
+        already exists, a numeric suffix is appended (such as ``-1``, ``-2``,
+        etc.) to avoid overwriting it. A warning is logged, and a new file with
+        an empty database is created in its place.
 
         Parameters
         ----------
@@ -164,7 +166,7 @@ class Cache:
                         logger.info("Loaded database from %s", filename)
 
                 except (json.JSONDecodeError, UnicodeDecodeError, TypeError) as e:
-                    backup = f"{filename}.corrupt-{int(time.time())}"
+                    backup = _generate_corrupt_backup_path(filename)
                     os.replace(filename, backup)
                     logger.warning(
                         "Corrupt database file %s (%s); moved to %s and starting fresh",
@@ -190,14 +192,46 @@ class Cache:
             if self.db is None or self.filename is None:
                 logger.error("Cannot flush database: database is not loaded")
                 return
-            with open(self.filename, "wb+") as f:
-                f.write(json.dumps(self.db).encode())
+            dir_name: str = os.path.dirname(self.filename) or "."
+            with tempfile.NamedTemporaryFile(
+                "wb", dir=dir_name, delete=False
+            ) as tmp_file:
+                tmp_file.write(json.dumps(self.db).encode())
+                tmp_file.flush()
+                os.fsync(tmp_file.fileno())
+            os.replace(tmp_file.name, self.filename)
 
 
 def _write_default(filename: str) -> dict[str, str]:
     with open(filename, "wb") as f:
         f.write(json.dumps(DEFAULT_DB).encode())
     return dict(DEFAULT_DB)
+
+
+def _generate_corrupt_backup_path(filename: str) -> str:
+    """Generate an unused backup path for a corrupt database file.
+
+    The first backup uses ``<filename>.corrupt-<unix timestamp>``.
+    If that path already exists, numeric suffixes such as ``-1``,
+    ``-2`` and so on are tried until an unused path is found.
+
+    Parameters
+    ----------
+    filename : str
+        Path of the database file.
+
+    Returns
+    -------
+    str
+        Unused backup path.
+    """
+    base = f"{filename}.corrupt-{int(time.time())}"
+    if not os.path.lexists(base):
+        return base
+    counter = 1
+    while os.path.lexists(f"{base}-{counter}"):
+        counter += 1
+    return f"{base}-{counter}"
 
 
 def require_db(cache: Cache) -> dict[str, str]:
